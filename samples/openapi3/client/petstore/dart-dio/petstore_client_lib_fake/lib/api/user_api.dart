@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.6
+// @dart=2.7
 
 // ignore_for_file: unused_import
 
@@ -14,10 +14,12 @@ import 'package:openapi/model/user.dart';
 import 'package:built_collection/built_collection.dart';
 
 class UserApi {
-    final Dio _dio;
-    Serializers _serializers;
 
-    UserApi(this._dio, this._serializers);
+    final Dio _dio;
+
+    final Serializers _serializers;
+
+    const UserApi(this._dio, this._serializers);
 
     /// Create user
     ///
@@ -272,6 +274,7 @@ class UserApi {
             return Response<User>(
                 data: data,
                 headers: response.headers,
+                isRedirect: response.isRedirect,
                 request: response.request,
                 redirects: response.redirects,
                 statusCode: response.statusCode,
@@ -332,6 +335,7 @@ class UserApi {
             return Response<String>(
                 data: data,
                 headers: response.headers,
+                isRedirect: response.isRedirect,
                 request: response.request,
                 redirects: response.redirects,
                 statusCode: response.statusCode,

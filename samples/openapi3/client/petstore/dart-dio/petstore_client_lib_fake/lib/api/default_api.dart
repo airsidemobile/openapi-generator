@@ -1,7 +1,7 @@
 //
 // AUTO-GENERATED FILE, DO NOT MODIFY!
 //
-// @dart=2.6
+// @dart=2.7
 
 // ignore_for_file: unused_import
 
@@ -13,10 +13,12 @@ import 'package:built_value/serializer.dart';
 import 'package:openapi/model/inline_response_default.dart';
 
 class DefaultApi {
-    final Dio _dio;
-    Serializers _serializers;
 
-    DefaultApi(this._dio, this._serializers);
+    final Dio _dio;
+
+    final Serializers _serializers;
+
+    const DefaultApi(this._dio, this._serializers);
 
     /// 
     ///
@@ -69,6 +71,7 @@ class DefaultApi {
             return Response<InlineResponseDefault>(
                 data: data,
                 headers: response.headers,
+                isRedirect: response.isRedirect,
                 request: response.request,
                 redirects: response.redirects,
                 statusCode: response.statusCode,

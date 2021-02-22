@@ -1,6 +1,5 @@
 import { DynamicModule, HttpService, HttpModule, Module, Global } from '@nestjs/common';
 import { Configuration } from './configuration';
-import { BASE_PATH } from './variables';
 
 import { PetService } from './api/pet.service';
 import { StoreService } from './api/store.service';
@@ -9,11 +8,15 @@ import { UserService } from './api/user.service';
 @Global
 @Module({
   imports:      [ HttpModule ],
-  exports:      [   
-    PetServiceStoreServiceUserService 
+  exports:      [
+    PetService,
+    StoreService,
+    UserService
   ],
   providers: [
-    PetServiceStoreServiceUserService 
+    PetService,
+    StoreService,
+    UserService
   ]
 })
 export class ApiModule {

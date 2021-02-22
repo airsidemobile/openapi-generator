@@ -4,13 +4,16 @@
 <a name="documentation-for-api-endpoints"></a>
 ## Documentation for API Endpoints
 
-All URIs are relative to *{{{basePath}}}*
+  All URIs are relative to *{{{basePath}}}*
 
-Class | Method | HTTP request | Description
------------- | ------------- | ------------- | -------------
-{{#apiInfo}}{{#apis}}{{#operations}}{{#operation}}*{{classname}}* | [**{{operationId}}**](Apis/{{apiDocPath}}{{classname}}.md#{{operationIdLowerCase}}) | **{{httpMethod}}** {{path}} | {{#summary}}{{{summary}}}{{/summary}}{{^summary}}{{{notes}}}{{/summary}}
+{{#apiInfo}}{{#apis}}{{#operations}}{{#operation}}
+### {{classname}}
+* [**{{operationId}}**](Apis/{{apiDocPath}}{{classname}}.md#{{operationIdLowerCase}})
+    * **{{httpMethod}}** {{path}}
+    * {{#summary}}{{{summary}}}{{/summary}}{{^summary}}{{{notes}}}{{/summary}}
 {{/operation}}{{/operations}}{{/apis}}{{/apiInfo}}
 {{/generateApiDocs}}
+
 
 {{#generateModelDocs}}
 <a name="documentation-for-models"></a>

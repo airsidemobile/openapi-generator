@@ -2086,7 +2086,7 @@ public class DefaultCodegen implements CodegenConfig {
             return "AnyType";
         } else if (StringUtils.isNotEmpty(schema.getType())) {
             if (!importMapping.containsKey(schema.getType())) {
-                LOGGER.warn("Unknown type found in the schema: " + schema.getType());
+                LOGGER.warn("Unknown type found in the schema: " + schema.getType() + " : props: " + schema.getProperties() + " : format: " + schema.getFormat());
             }
             return schema.getType();
         }

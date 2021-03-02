@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
@@ -95,14 +96,14 @@ public class MarkdownDocumentationCodegen extends DefaultCodegen implements Code
          */
         languageSpecificPrimitives.clear();
         languageSpecificPrimitives.add("array");
-        languageSpecificPrimitives.add("map");
+        languageSpecificPrimitives.add("object");
         languageSpecificPrimitives.add("boolean");
         languageSpecificPrimitives.add("integer");
         languageSpecificPrimitives.add("float");
         languageSpecificPrimitives.add("string");
         languageSpecificPrimitives.add("binary");
-        languageSpecificPrimitives.add("date");
-        languageSpecificPrimitives.add("date-time");
+//        languageSpecificPrimitives.add("date");
+//        languageSpecificPrimitives.add("date-time");
 
 
     }
@@ -182,7 +183,13 @@ public class MarkdownDocumentationCodegen extends DefaultCodegen implements Code
         }
         return "swagger::OneOf" + types.size() + "<" + String.join(",", types) + ">";
     }
-
+//    public String toOneOfName(List<String> names, ComposedSchema composedSchema) {
+//        Map<String, Object> exts = composedSchema.getExtensions();
+//        if (exts != null && exts.containsKey("x-one-of-name")) {
+//            return (String) exts.get("x-one-of-name");
+//        }
+//        return "oneOf<" + String.join(",", names) + ">";
+//    }
     @Override
     public String toAllOfName(List<String> names, ComposedSchema composedSchema) {
         List<String> types = getTypesFromSchemas(composedSchema.getAllOf());
@@ -222,6 +229,19 @@ public class MarkdownDocumentationCodegen extends DefaultCodegen implements Code
             return schemaType;
         }).distinct().collect(Collectors.toList());
     }
-
+    @Override
+    public CodegenProperty fromProperty(String name, Schema p) {
+        CodegenProperty cp = super.fromProperty(name, p);
+        if (cp.isEnum) {
+            updateCodegenPropertyEnum(cp);
+        }
+        if (cp.isPrimitiveType && p.get$ref() != null) {
+            cp.complexType = cp.dataType;
+        }
+        if (cp.isArray && cp.complexType == null && cp.mostInnerItems.complexType != null) {
+            cp.complexType = cp.mostInnerItems.complexType;
+        }
+        return cp;
+    }
 
 }
